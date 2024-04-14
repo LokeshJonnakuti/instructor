@@ -30,7 +30,6 @@ def fn(a: int, b: int) -> Multiply:
 
 
 if __name__ == "__main__":
-
     log_lines = {
         "messages": [
             {
