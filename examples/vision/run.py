@@ -2,6 +2,7 @@ import instructor
 from openai import OpenAI
 from pydantic import BaseModel
 import base64
+import secrets
 
 client = instructor.patch(OpenAI(), mode=instructor.function_calls.Mode.MD_JSON)
 
@@ -19,7 +20,6 @@ def encode_image(image_path):
 
 def draw_circle(image_size, num_circles, path):
     from PIL import Image, ImageDraw
-    import random
 
     image = Image.new("RGB", image_size, "white")
 
@@ -27,9 +27,9 @@ def draw_circle(image_size, num_circles, path):
     for _ in range(num_circles):
         # Randomize the circle properties
         radius = 100  # random.randint(10, min(image_size)//5)  # Radius between 10 and 1/5th of the smallest dimension
-        x = random.randint(radius, image_size[0] - radius)
-        y = random.randint(radius, image_size[1] - radius)
-        color = ["red", "black", "blue", "green"][random.randint(0, 3)]
+        x = secrets.SystemRandom().randint(radius, image_size[0] - radius)
+        y = secrets.SystemRandom().randint(radius, image_size[1] - radius)
+        color = ["red", "black", "blue", "green"][secrets.SystemRandom().randint(0, 3)]
 
         circle_position = (x - radius, y - radius, x + radius, y + radius)
         print(f"Generating circle at {x, y} with color {color}")

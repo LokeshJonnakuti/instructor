@@ -3,6 +3,7 @@ import logging
 from pydantic import BaseModel, Field
 from instructor import Instructions
 import instructor
+import secrets
 
 instructor.patch()
 
@@ -33,11 +34,10 @@ def fn(a: int, b: int) -> Multiply:
 
 
 if __name__ == "__main__":
-    import random
 
     for _ in range(5):
-        a = random.randint(100, 999)
-        b = random.randint(100, 999)
+        a = secrets.SystemRandom().randint(100, 999)
+        b = secrets.SystemRandom().randint(100, 999)
         result = fn(a, b)
         print(f"{a} * {b} = {result.result}, expected {a*b}")
     """

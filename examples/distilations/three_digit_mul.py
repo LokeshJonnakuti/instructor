@@ -2,6 +2,7 @@ import logging
 
 from pydantic import BaseModel, Field
 from instructor import Instructions
+import secrets
 
 logging.basicConfig(level=logging.INFO)
 
@@ -29,7 +30,6 @@ def fn(a: int, b: int) -> Multiply:
 
 
 if __name__ == "__main__":
-    import random
 
     log_lines = {
         "messages": [
@@ -67,6 +67,6 @@ if __name__ == "__main__":
         ],
     }
     for _ in range(10):
-        a = random.randint(100, 999)
-        b = random.randint(100, 999)
+        a = secrets.SystemRandom().randint(100, 999)
+        b = secrets.SystemRandom().randint(100, 999)
         print("returning", fn(a, b=b))
